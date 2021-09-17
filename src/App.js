@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import PropTypes from "prop-types";
 
-function App() {
+function App({ subject }) {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Make it a11ble!</h1>
+        <img src={logo} className="App-logo" alt="atom and electrons" />
       </header>
+      <p role="main">Hello, {subject}!</p>
     </div>
   );
 }
-
+App.propTypes = {
+  subject: PropTypes.string.isRequired,
+};
 export default App;
