@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Todo from "./components/Todo";
 import Form from "./components/Form";
+import FilterButton from "./components/FilterButton";
 
 
 function App(props) {
@@ -18,22 +19,11 @@ function App(props) {
       <Form />
 
       <div className="filters btn-group stack-exception">
-        <button type="button" className="btn toggle-btn" aria-pressed="true">
-          <span className="visually-hidden">Show </span>
-          <span>all</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
-        <button type="button" className="btn toggle-btn" aria-pressed="false">
-          <span className="visually-hidden">Show </span>
-          <span>Active</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
-        <button type="button" className="btn toggle-btn" aria-pressed="false">
-          <span className="visually-hidden">Show </span>
-          <span>Completed</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
+        <FilterButton mode="All"/>
+        <FilterButton mode="Active"/>
+        <FilterButton mode="Completed"/>        
       </div>
+
       <h2 id="list-heading">3 tasks remaining</h2>
       <ul
         className="todo-list stack-large stack-exception"
