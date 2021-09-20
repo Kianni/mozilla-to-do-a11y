@@ -1,8 +1,22 @@
-// import PropTypes from "prop-types";
+import { useState } from "react";
+import PropTypes from "prop-types";
 
-function Form (){
+function Form (props){
+
+    const [name, setName] = useState('');
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        props.addTask(name);
+        setName("");
+    }
+
+    function handleChange(e) {
+        setName(e.target.value);
+    }
+    
     return(
-    <form>  
+    <form onSubmit={handleSubmit}>  
         <h2 className="label-wrapper">
           <label htmlFor="new-todo-input" className="label__lg">
             What needs to be done?
@@ -12,6 +26,8 @@ function Form (){
               className="input input__lg"
               name="text"
               autoComplete="off"
+              value={name}
+              onChange={handleChange}
             />
           </label>
         </h2>
@@ -23,10 +39,8 @@ function Form (){
     )
 }
 
-// Form.propTypes = {
-//     name: PropTypes.string.isRequired,
-//     completed: PropTypes.bool.isRequired,
-//     id: PropTypes.string.isRequired,
-//   };
+Form.propTypes = {
+    addTask: PropTypes.func.isRequired
+  };
 
 export default Form;
