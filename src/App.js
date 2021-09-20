@@ -1,9 +1,17 @@
 import PropTypes from "prop-types";
+import Todo from "./components/Todo";
 
 function App(props) {
-  console.log(props);
+  //console.log(props);
+
+  const taskList = props.tasks.map( task => 
+        <Todo name={task.name} 
+              completed={task.completed} 
+              id={task.id} 
+              key={task.id}/>);
+
   return (
-    <div className="todoapp stack-large">
+    <div className="todoapp stack-large" role="main">
       <h1>TodoMatic</h1>
       <form>
         <h2 className="label-wrapper">
@@ -46,59 +54,13 @@ function App(props) {
         className="todo-list stack-large stack-exception"
         aria-labelledby="list-heading"
       >
-        <li className="todo stack-small">
-          <div className="c-cb">
-            <label className="todo-label" htmlFor="todo-0">
-              <input id="todo-0" type="checkbox" defaultChecked={true} />
-              Eat
-            </label>
-          </div>
-          <div className="btn-group">
-            <button type="button" className="btn">
-              Edit <span className="visually-hidden">Eat</span>
-            </button>
-            <button type="button" className="btn btn__danger">
-              Delete <span className="visually-hidden">Eat</span>
-            </button>
-          </div>
-        </li>
-        <li className="todo stack-small">
-          <div className="c-cb">
-            <label className="todo-label" htmlFor="todo-1">
-              Sleep
-              <input id="todo-1" type="checkbox" />
-            </label>
-          </div>
-          <div className="btn-group">
-            <button type="button" className="btn">
-              Edit <span className="visually-hidden">Sleep</span>
-            </button>
-            <button type="button" className="btn btn__danger">
-              Delete <span className="visually-hidden">Sleep</span>
-            </button>
-          </div>
-        </li>
-        <li className="todo stack-small">
-          <div className="c-cb">
-            <label className="todo-label" htmlFor="todo-2">
-              Repeat
-              <input id="todo-2" type="checkbox" />
-            </label>
-          </div>
-          <div className="btn-group">
-            <button type="button" className="btn">
-              Edit <span className="visually-hidden">Repeat</span>
-            </button>
-            <button type="button" className="btn btn__danger">
-              Delete <span className="visually-hidden">Repeat</span>
-            </button>
-          </div>
-        </li>
+        {taskList}
+
       </ul>
     </div>
   );
 }
 App.propTypes = {
-  subject: PropTypes.string.isRequired,
+  tasks: PropTypes.array.isRequired,
 };
 export default App;
