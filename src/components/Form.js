@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 function Form (){
     return(
@@ -23,10 +23,10 @@ function Form (){
     )
 }
 
-Form.propTypes = {
-    name: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired,
-    id: PropTypes.string.isRequired,
-  };
+// Form.propTypes = {
+//     name: PropTypes.string.isRequired,
+//     completed: PropTypes.bool.isRequired,
+//     id: PropTypes.string.isRequired,
+//   };
 
 export default Form;
