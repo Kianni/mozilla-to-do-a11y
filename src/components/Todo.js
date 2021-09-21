@@ -1,37 +1,71 @@
-//import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 export default function Todo(props) {
     // const name = props.name;
-    return (
-        <li className="todo stack-small">
-        <div className="c-cb">
-          <label className="todo-label" htmlFor={props.id} >
-            <input 
-              id={props.id} 
-              type="checkbox" 
-              defaultChecked={props.completed} 
-              onChange={() => props.toggleTaskCompleted(props.id)}/>
-            {props.name}
+    const [isEditing, setEditing] = useState(false);
+
+    const editingTemplate = (
+      <form className="stack-small">
+        <div className="form-group">
+          <label className="todo-label" htmlFor={props.id}>
+            <input id={props.id} className="todo-text" type="text" />
+
+            New name for {props.name}
           </label>
+          
         </div>
         <div className="btn-group">
           <button 
             type="button" 
-            className="btn"
+            className="btn todo-cancel"
+            onClick={() => setEditing(false)}
           >
-            Edit <span className="visually-hidden">{props.name}</span>
+            Cancel
+            <span className="visually-hidden">renaming {props.name}</span>
           </button>
-          
-          <button 
-            type="button" 
-            className="btn btn__danger"
-            onClick={()=>props.deleteTask(props.id)}
-          >
-            Delete <span className="visually-hidden">{props.name}</span>
+          <button type="submit" className="btn btn__primary todo-edit">
+            Save
+            <span className="visually-hidden">new name for {props.name}</span>
           </button>
         </div>
-      </li>
+      </form>
+    );
+
+    const viewTemplate = (
+      <div className="stack-small">
+        <div className="c-cb">
+            
+            <label className="todo-label" htmlFor={props.id}>
+              <input
+                id={props.id}
+                type="checkbox"
+                defaultChecked={props.completed}
+                onChange={() => props.toggleTaskCompleted(props.id)}
+              />
+              {props.name}
+            </label>
+          </div>
+          <div className="btn-group">
+            <button 
+              type="button" 
+              className="btn"
+              onClick={() => setEditing(true)}
+            >
+              Edit <span className="visually-hidden">{props.name}</span>
+            </button>
+            <button
+              type="button"
+              className="btn btn__danger"
+              onClick={() => props.deleteTask(props.id)}
+            >
+              Delete <span className="visually-hidden">{props.name}</span>
+            </button>
+          </div>
+      </div>
+    );
+    return (
+      <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>
     );
   }
 
@@ -40,5 +74,6 @@ Todo.propTypes = {
     completed: PropTypes.bool.isRequired,
     id: PropTypes.string.isRequired,
     toggleTaskCompleted: PropTypes.func.isRequired,
-    deleteTask: PropTypes.func.isRequired
+    deleteTask: PropTypes.func.isRequired,
+    setEditing: PropTypes.func.isRequired
   };
